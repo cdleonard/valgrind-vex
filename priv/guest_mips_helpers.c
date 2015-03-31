@@ -754,7 +754,7 @@ UInt mips32_dirtyhelper_mfc0(UInt rd, UInt sel)
 ULong mips64_dirtyhelper_dmfc0 ( UInt rd, UInt sel )
 {
    ULong x = 0;
-#if defined(VGP_mips64_linux)
+#if defined(VGP_mips64_linux) || defined(VGP_mips64n32_linux)
    switch (sel) {
      case 0:
         /* __asm__("dmfc0 %0, $1, 0" :"=r" (x)); */
