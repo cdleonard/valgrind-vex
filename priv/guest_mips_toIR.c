@@ -17324,8 +17324,10 @@ DisResult disInstr_MIPS( IRSB*        irsb_IN,
    host_endness = host_endness_IN;
 #if defined(VGP_mips32_linux)
    guest_PC_curr_instr = (Addr32)guest_IP;
-#elif defined(VGP_mips64_linux)
+#elif defined(VGP_mips64_linux) || defined(VGP_mips64n32_linux)
    guest_PC_curr_instr = (Addr64)guest_IP;
+#else
+#error bad mips variant
 #endif
 
    dres = disInstr_MIPS_WRK(resteerOkFn, resteerCisOk, callback_opaque,
