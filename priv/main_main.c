@@ -150,7 +150,7 @@
 #define MIPS32ST(f) vassert(0)
 #endif
 
-#if defined(VGA_mips64) || defined(VEXMULTIARCH)
+#if defined(VGA_mips64) || defined(VGA_mips64n32) || defined(VEXMULTIARCH)
 #define MIPS64FN(f) f
 #define MIPS64ST(f) f
 #else
