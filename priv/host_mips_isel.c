@@ -1639,8 +1639,16 @@ static HReg iselWordExpr_R_wrk(ISelEnv * env, IRExpr * e)
             HReg r_dst = newVRegI(env);
             HReg r_src = iselWordExpr_R(env, e->Iex.Unop.arg);
 
-            addInstr(env, MIPSInstr_Cmp(False, True, r_dst, r_src,
-                                        hregMIPS_GPR0(mode64), MIPScc_NE));
+            if (mode64) {
+               HReg tmp = newVRegI(env);
+               addInstr(env, MIPSInstr_Shft(Mshft_SLL, True /*!32bit shift */,
+                                            tmp, r_src, MIPSRH_Imm(True, 0)));
+               addInstr(env, MIPSInstr_Cmp(False, True, r_dst, tmp,
+                                           hregMIPS_GPR0(mode64), MIPScc_NE));
+            } else {
+               addInstr(env, MIPSInstr_Cmp(False, True, r_dst, r_src,
+                                           hregMIPS_GPR0(mode64), MIPScc_NE));
+            }
             return r_dst;
          }
 
