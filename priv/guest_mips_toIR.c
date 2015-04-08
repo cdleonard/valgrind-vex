@@ -2663,6 +2663,17 @@ static Bool dis_instr_CVM ( UInt theInstr )
                                                   False));
                      break;
                   }
+                  case 0x04: {  // LHX rd, index(base) (Cavium OCTEON)
+                     DIP("lhx r%d, r%d(r%d)", regRd, regRt, regRs);
+                     LOADX_STORE_PATTERN;
+                     if (mode64)
+                        putIReg(regRd,
+                                unop(Iop_16Sto64, load(Ity_I16, mkexpr(t1))));
+                     else
+                        putIReg(regRd,
+                                unop(Iop_16Sto32, load(Ity_I16, mkexpr(t1))));
+                     break;
+                  }
                   case 0x14: {  // LHUX rd, index(base) (Cavium OCTEON)
                      DIP("lhux r%d, r%d(r%d)", regRd, regRt, regRs);
                      LOADX_STORE_PATTERN;
