@@ -52,7 +52,7 @@
    into memory, the rate falls by about a factor of 3. 
 */
 
-#define N_TEMPORARY_BYTES 5000000
+#define N_TEMPORARY_BYTES 10000000
 
 static HChar  temporary[N_TEMPORARY_BYTES] __attribute__((aligned(REQ_ALIGN)));
 static HChar* temporary_first = &temporary[0];
